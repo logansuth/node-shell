@@ -2,6 +2,7 @@ const pwd = require('./pwd');
 const fs = require('fs');
 const ls = require('./ls');
 const cat = require('./cat');
+const curl = require('./curl');
 
 process.stdout.write('prompt > ');
 
@@ -12,7 +13,9 @@ process.stdin.on('data', (data) => {
     pwd();
   } else if (cmd[0] === 'ls') {
     ls();
-  } else {
+  } else if (cmd[0] === 'cat') {
     cat(cmd[1]);
+  } else {
+    curl(cmd[1]);
   }
 });
