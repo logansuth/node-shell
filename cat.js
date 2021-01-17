@@ -1,12 +1,11 @@
 const fs = require('fs');
 
-function cat(file) {
+function cat(file, done) {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
-      process.stdout.write(err);
-      return;
+      done('something is horribly wrong');
     }
-    process.stdout.write(data);
+    done(data);
   });
 }
 

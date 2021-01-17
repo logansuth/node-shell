@@ -6,16 +6,30 @@ const curl = require('./curl');
 
 process.stdout.write('prompt > ');
 
-process.stdin.on('data', (data) => {
-  const cmd = data.toString().trim().split(' ');
+const done = (output) => {
+  process.stdout.write(output);
+  process.stdout.write('> ');
+};
 
-  if (cmd[0] === 'pwd') {
-    pwd();
-  } else if (cmd[0] === 'ls') {
-    ls();
-  } else if (cmd[0] === 'cat') {
-    cat(cmd[1]);
-  } else {
-    curl(cmd[1]);
+process.stdin.on('data', (data) => {
+  const args = data.toString().trim().split(' ');
+  const cmd = args[0];
+  const arg = args[1];
+
+  switch (cmd) {
+    case 'pwd':
+      pwd(done);
+      break;
+    case 'ls':
+      ls(done);
+      break;
+    case 'cat':
+      cat(arg, done);
+      break;
+    case 'curl':
+      curl(arg, done);
+      break;
+    default:
+      done('prompt ');
   }
 });
