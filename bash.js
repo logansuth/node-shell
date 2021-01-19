@@ -1,5 +1,4 @@
 const pwd = require('./pwd');
-const fs = require('fs');
 const ls = require('./ls');
 const cat = require('./cat');
 const curl = require('./curl');
